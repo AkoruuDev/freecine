@@ -1,3 +1,5 @@
+import GlobalStyle from "./style/globalStyles";
+
 import Top from "./components/Top";
 import Main from "./components/Main";
 import Footer from "./components/Footer";
@@ -10,6 +12,7 @@ import Order from "./components/Order";
 export default function App() {
     return(
         <>
+            <GlobalStyle />
             <Top />
             <Main>
                 <Films />
