@@ -1,4 +1,5 @@
 import GlobalStyle from "./style/globalStyles";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import Top from "./components/Top";
 import Main from "./components/Main";
@@ -11,16 +12,18 @@ import Order from "./components/Order";
 
 export default function App() {
     return(
-        <>
+        <BrowserRouter>
             <GlobalStyle />
             <Top />
             <Main>
-                <Films />
-                <MovieTime />
-                <Seats />
-                <Order />
+                <Routes>
+                    <Route path="/" element={<Films />} />
+                    <Route path="/sessoes/:movieID" element={<MovieTime />} />
+                    <Route path="/assentos/:sessionID" element={<Seats />} />
+                    <Route path="/sucesso" element={<Order />} />
+                </Routes>
             </Main>
             <Footer />
-        </>
+        </BrowserRouter>
     );
 }
