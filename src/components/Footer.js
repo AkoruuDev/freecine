@@ -1,11 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 
-export default function Footer() {
-    const [folder, setFolder] = useState(""); // https://img.wattpad.com/cover/71504095-352-k819710.jpg
-    const [movieName, setMovieName] = useState("O gorro da Chapezinho");
-    const [session, setSession] = useState("Quinta-feira - 15:00");
-
+export default function Footer({ folder, movieName, session }) {
     return(
         <Container>
             {folder === "" ? "" : (

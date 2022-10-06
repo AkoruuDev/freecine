@@ -1,8 +1,23 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { getMovies } from "../services/Axios";
 
-export default function Films() {
+function Folder({ folder, setFolder, setMovieName }) {
+    const navigate = useNavigate();
+
+    return(
+        <span onClick={() => {
+            navigate(`/sessoes/${folder.id}`);
+            setFolder(folder.posterURL);
+            setMovieName(folder.title);
+        }}>
+            <Image src={folder.posterURL} alt="Poster"/>
+        </span>
+    )
+}
+
+export default function Films({ setFolder, setMovieName }) {
     const [folders, setFolders] = useState([]);
 
     useEffect(() => {
@@ -16,7 +31,7 @@ export default function Films() {
     console.log(folders)
     return(
         <Container>
-            {folders?.map(folder => <Image key={folder.id} src={folder.posterURL} />)}
+            {folders?.map(folder => <Folder key={folder.id} folder={folder} setFolder={setFolder} setMovieName={setMovieName}/>)}
         </Container>
     );
 }
