@@ -23,7 +23,7 @@ export default function App() {
             <Main>
                 <Routes>
                     <Route path="/" element={<Films setFolder={setFolder} setMovieName={setMovieName} />} />
-                    <Route path="/sessoes/:movieID" element={<MovieTime />} />
+                    <Route path="/sessoes/:movieID" element={<MovieTime setSession={setSession} />} />
                     <Route path="/assentos/:sessionID" element={<Seats />} />
                     <Route path="/sucesso" element={<Order />} />
                 </Routes>

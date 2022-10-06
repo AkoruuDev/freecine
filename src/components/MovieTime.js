@@ -1,18 +1,28 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { getSessions } from "../services/Axios";
 
-function Time({ time }) {
+function Time({ time, setSession }) {
+    const navigate = useNavigate();
+
     return(
         <div>
             <Info>{time.weekday} - {time.date}</Info>
-            <ButtonBox>{time.showtimes?.map(hour => (<Button key={hour.id}>{hour.name}</Button>))}</ButtonBox>
+            <ButtonBox>{time.showtimes?.map(hour => (
+                <Button key={hour.id}
+                    onClick={() => {
+                        navigate(`/assentos/${hour.id}`);
+                        setSession(`${time.weekday} - ${hour.name}`)
+                    }}>
+                        {hour.name}
+                </Button>
+            ))}</ButtonBox>
         </div>
     )
 }
 
-export default function MovieTime() {
+export default function MovieTime({ setSession }) {
     const [movieTime, setMovieTime] = useState([])
 
     const { movieID } = useParams();
@@ -28,7 +38,7 @@ export default function MovieTime() {
     return(
         <Container>
             <Title>Selecione o Horario</Title>
-            <Box>{movieTime?.map(time => <Time key={time.id} time={time} />)}</Box>
+            <Box>{movieTime?.map(time => <Time key={time.id} time={time} setSession={setSession} />)}</Box>
         </Container>
     );
 }
