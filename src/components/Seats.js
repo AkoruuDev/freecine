@@ -3,17 +3,35 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { getSeats } from "../services/Axios";
 import ShowAlert from "../services/Alert";
+import ShowConfirm from "../services/Confirm";
 
 function Seat({ e }) {
-    const [show, setShow] = useState(false);
+    const [showAlert, setShowAlert] = useState(false);
+    const [showConfirm, setShowConfirm] = useState(false);
+    const [select, setSelect] = useState(false);
 
     return(
         <>
-            {e.isAvailable ?
-                <Available>{e.name}</Available> :
-                <Unavailable onClick={() => setShow(true)}>{e.name}</Unavailable>
+            {!e.isAvailable ?
+                <Unavailable onClick={() => setShowAlert(true)}>{e.name}</Unavailable> :
+                select ?
+                    <Selected onClick={() => setShowConfirm(true)}>{e.name}</Selected> :
+                    <Available onClick={() => setSelect(true)}>{e.name}</Available>
+                    
             }
-            <ShowAlert message={"Este assento não está disponível"} show={show} setShow={setShow} />
+            <ShowAlert
+                message={"Este assento não está disponível"}
+                show={showAlert}
+                setShow={setShowAlert}
+            />
+            <ShowConfirm
+                title={"Remover assento?"}
+                message={`Você está prestes a remover o assento ${e.name}, tem certeza?`}
+                action={setSelect}
+                cancel={true}
+                showConfirm={showConfirm}
+                setShowConfirm={setShowConfirm}
+            />
         </>
     )
 }
@@ -130,6 +148,12 @@ const Available = styled(Bool)`
 const Selected = styled(Bool)`
     background-color: #1AAE9E;
     border: #0E7D71;
+
+&:hover {
+    cursor: pointer;
+    background-color: #3CC0AF;
+    border: #209F93;
+}
 `
 
 const Unavailable = styled(Bool)`
