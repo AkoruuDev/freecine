@@ -37,7 +37,9 @@ function Seat({ e }) {
 }
 
 export default function Seats() {
-    const [mySeats, setMySeats] = useState([])
+    const [mySeats, setMySeats] = useState([]);
+    const [inName, setInName] = useState("");
+    const [inCPF, setInCPF] = useState("");
 
     const { sessionID } = useParams();
 
@@ -71,12 +73,28 @@ export default function Seats() {
 
             <Form>
                 <Text htmlFor="inName">Nome do comprador</Text>
-                <Input type="text" id="inName" name="inName" placeholder="ex: Maria de Lurdes" />
+                <Input
+                    type="text"
+                    id="inName"
+                    name="inName"
+                    placeholder="ex: Maria de Lurdes"
+                    value={inName}
+                    onChange={e => setInName(e.target.value)}
+                />
                 <Text htmlFor="inCPF">CPF do comprador</Text>
-                <Input type="text" id="inCPF" name="inCPF" placeholder="ex: 12345678900" />
+                <Input
+                    type="text"
+                    id="inCPF"
+                    name="inCPF"
+                    placeholder="ex: 12345678900"
+                    value={inCPF}
+                    onChange={e => setInCPF(e.target.value)}
+                />
             </Form>
 
-            <Button>Reservar assento(s)</Button>
+            <Button onClick={() => {
+                ""
+            }}>Reservar assento(s)</Button>
         </Container>
     );
 }
