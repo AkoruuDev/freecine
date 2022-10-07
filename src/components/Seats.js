@@ -2,14 +2,18 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { getSeats } from "../services/Axios";
+import ShowAlert from "../services/Alert";
 
 function Seat({ e }) {
+    const [show, setShow] = useState(false);
+
     return(
         <>
             {e.isAvailable ?
                 <Available>{e.name}</Available> :
-                <Unavailable>{e.name}</Unavailable>
+                <Unavailable onClick={() => setShow(true)}>{e.name}</Unavailable>
             }
+            <ShowAlert message={"Este assento não está disponível"} show={show} setShow={setShow} />
         </>
     )
 }
@@ -34,15 +38,15 @@ export default function Seats() {
             <Box>{mySeats.map(e => <Seat key={e.id} e={e} />)}</Box>
             <Subtitle>
                 <SubtitleInfo>
-                    <Selected></Selected>
+                    <Green></Green>
                     <p>Selecionado</p>
                 </SubtitleInfo>
                 <SubtitleInfo>
-                    <Available></Available>
+                    <Gray></Gray>
                     <p>Disponível</p>
                 </SubtitleInfo>
                 <SubtitleInfo>
-                    <Unavailable></Unavailable>
+                    <Yellow></Yellow>
                     <p>Indisponível</p>
                 </SubtitleInfo>
             </Subtitle>
@@ -83,10 +87,6 @@ const Box = styled.div`
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-
-    & div:hover {
-        cursor: pointer;
-    }
 `
 
 const Subtitle = styled.div`
@@ -119,6 +119,12 @@ const Bool = styled.div`
 const Available = styled(Bool)`
     background-color: #C3CFD9;
     border: #7B8B99;
+
+    &:hover {
+        cursor: pointer;
+        background-color: #D4D0EA;
+        border: #8C9CAA;
+    }
 `
 
 const Selected = styled(Bool)`
@@ -127,6 +133,21 @@ const Selected = styled(Bool)`
 `
 
 const Unavailable = styled(Bool)`
+    background-color: #FBE192;
+    border: #F7C52B;
+`
+
+const Gray = styled(Bool)`
+    background-color: #C3CFD9;
+    border: #7B8B99;
+`
+
+const Green = styled(Bool)`
+    background-color: #1AAE9E;
+    border: #0E7D71;
+`
+
+const Yellow = styled(Bool)`
     background-color: #FBE192;
     border: #F7C52B;
 `
