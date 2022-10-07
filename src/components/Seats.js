@@ -5,10 +5,20 @@ import { getSeats } from "../services/Axios";
 import ShowAlert from "../services/Alert";
 import ShowConfirm from "../services/Confirm";
 
-function Seat({ e }) {
+function handleRemoveSeat(e, seats, setSeats) {
+    const newArray = seats.filter(seat => seat !== e.id)
+    setSeats(newArray)
+}
+
+function Seat({ e, seats, setSeats }) {
     const [showAlert, setShowAlert] = useState(false);
     const [showConfirm, setShowConfirm] = useState(false);
     const [select, setSelect] = useState(false);
+
+    function verify() {
+        setSelect(false);
+        handleRemoveSeat(e, seats, setSeats);
+    }
 
     return(
         <>
@@ -16,7 +26,11 @@ function Seat({ e }) {
                 <Unavailable onClick={() => setShowAlert(true)}>{e.name}</Unavailable> :
                 select ?
                     <Selected onClick={() => setShowConfirm(true)}>{e.name}</Selected> :
-                    <Available onClick={() => setSelect(true)}>{e.name}</Available>
+                    <Available onClick={() => {
+                        setSelect(true);
+                        setSeats([...seats, e.id])
+                        console.log(e)
+                    }}>{e.name}</Available>
                     
             }
             <ShowAlert
@@ -27,7 +41,7 @@ function Seat({ e }) {
             <ShowConfirm
                 title={"Remover assento?"}
                 message={`Você está prestes a remover o assento ${e.name}, tem certeza?`}
-                action={setSelect}
+                action={verify}
                 cancel={true}
                 showConfirm={showConfirm}
                 setShowConfirm={setShowConfirm}
@@ -36,14 +50,14 @@ function Seat({ e }) {
     )
 }
 
-export default function Seats() {
+export default function Seats({ post, setPost }) {
     const [mySeats, setMySeats] = useState([]);
+    const [seats, setSeats] = useState([]);
     const [inName, setInName] = useState("");
     const [inCPF, setInCPF] = useState("");
 
     const { sessionID } = useParams();
 
-    console.log(mySeats);
     useEffect(() => {
         getSeats(sessionID)
         .then(res => {
@@ -55,7 +69,7 @@ export default function Seats() {
     return(
         <Container>
             <Title>Selecione o(s) assento(s)</Title>
-            <Box>{mySeats.map(e => <Seat key={e.id} e={e} />)}</Box>
+            <Box>{mySeats.map(e => <Seat key={e.id} e={e} seats={seats} setSeats={setSeats} />)}</Box>
             <Subtitle>
                 <SubtitleInfo>
                     <Green></Green>
@@ -93,7 +107,12 @@ export default function Seats() {
             </Form>
 
             <Button onClick={() => {
-                ""
+                setPost(post => ({...post,
+                    ids: seats,
+                    name: inName,
+                    cpf: inCPF
+                }))
+                console.log(post);
             }}>Reservar assento(s)</Button>
         </Container>
     );

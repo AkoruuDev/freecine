@@ -1,6 +1,5 @@
 // request >> showConfirm("Title", "Your message here", func, true);
 
-import { useState } from "react";
 import styled from "styled-components";
 
 export default function ShowConfirm({ title, message, action, cancel, showConfirm, setShowConfirm }) {
@@ -12,7 +11,7 @@ export default function ShowConfirm({ title, message, action, cancel, showConfir
 							<Message>{message}</Message>
 							<Confirm>
 								<Button onClick={() => {
-									action(false)
+									action()
 									setShowConfirm(false)
 								}}>Confirm</Button>
 								{cancel ?
