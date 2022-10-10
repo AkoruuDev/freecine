@@ -1,10 +1,9 @@
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 export default function Order({ seats, post, movieName, session }) {
 
-    console.log(seats)
-    console.log(post)
-    console.log(session)
+    const navigate = useNavigate();
     return(
         <Container>
             <Title>Pedido feito com sucesso!</Title>
@@ -18,7 +17,10 @@ export default function Order({ seats, post, movieName, session }) {
                 <div>{post.name}</div>
                 <div>{post.cpf}</div>
             </Main>
-            <Button>Voltar pra Home</Button>
+            <Button onClick={() => {
+                navigate("/");
+                document.location.reload();
+            }}>Voltar pra Home</Button>
         </Container>
     );
 }
