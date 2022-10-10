@@ -4,10 +4,9 @@ import { postRequest } from "../services/Axios";
 
 export default function Order({ seats, post, movieName, session }) {
 
-    console.log(post)
     postRequest(post)
-        .then(() => console.log("foi"))
-        .catch(() => console.log("Deu ruim"))
+        .then()
+        .catch()
 
     const navigate = useNavigate();
     return(

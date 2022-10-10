@@ -120,9 +120,7 @@ export default function Seats({ post, setPost, seats, setSeats }) {
                     name: inName,
                     cpf: inCPF
                 }))
-                console.log(post)
                 navigate('/sucesso');
-                console.log(post);
             }}>Reservar assento(s)</Button>
         </Container>
     );

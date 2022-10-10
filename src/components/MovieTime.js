@@ -5,7 +5,7 @@ import { getSessions } from "../services/Axios";
 
 function Time({ time, setSession }) {
     const navigate = useNavigate();
-    console.log(time)
+
     return(
         <div>
             <Info>{time.weekday} - {time.date}</Info>
@@ -30,10 +30,9 @@ export default function MovieTime({ setSession }) {
     useEffect(() => {
         getSessions(movieID)
         .then(res => {
-            console.log(res.data.days);
             setMovieTime(res.data.days);
         })
-        .catch(console.log("deu ruim"));
+        .catch();
     }, [])
     return(
         <Container>

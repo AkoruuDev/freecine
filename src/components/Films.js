@@ -28,7 +28,6 @@ export default function Films({ setFolder, setMovieName }) {
             .catch(() => console.log("deu ruim"))
     }, [])
 
-    console.log(folders)
     return(
         <Container>
             {folders?.map(folder => <Folder key={folder.id} folder={folder} setFolder={setFolder} setMovieName={setMovieName}/>)}
