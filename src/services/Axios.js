@@ -18,7 +18,7 @@ function getSeats(SESSION_ID) {
 }
 
 function postRequest(ORDER) {
-    const promise = axios.get(`${BASE_URL}/seats/book-many`, ORDER);
+    const promise = axios.post(`${BASE_URL}/seats/book-many`, ORDER);
     return promise;
 }
 

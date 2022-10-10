@@ -1,7 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { postRequest } from "../services/Axios";
 
 export default function Order({ seats, post, movieName, session }) {
+
+    console.log(post)
+    postRequest(post)
+        .then(() => console.log("foi"))
+        .catch(() => console.log("Deu ruim"))
 
     const navigate = useNavigate();
     return(
@@ -12,7 +18,7 @@ export default function Order({ seats, post, movieName, session }) {
                 <h3>{movieName}</h3>
                 <h3>{session.date} - {session.hour}</h3>
                 <Text>Ingressos</Text>
-                <div>{seats.map(seat => <div>assento {seat.name}</div>)}</div>
+                <div>{seats.map(seat => <div key={seat.id}>assento {seat.name}</div>)}</div>
                 <Text>Comprador</Text>
                 <div>{post.name}</div>
                 <div>{post.cpf}</div>

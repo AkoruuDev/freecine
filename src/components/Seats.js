@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
-import { getSeats } from "../services/Axios";
+import { getSeats, postRequest } from "../services/Axios";
 import ShowAlert from "../services/Alert";
 import ShowConfirm from "../services/Confirm";
 
@@ -65,6 +65,15 @@ export default function Seats({ post, setPost, seats, setSeats }) {
         .catch(() => console.log("Deu ruim"))
     }, [])
 
+    function getSeatsName() {
+        let seatsBack = [];
+        
+        for (let i = 0; i < seats.length; i++) {
+            seatsBack.push(seats[i].id);
+        }
+
+        return seatsBack;
+    }
     return(
         <Container>
             <Title>Selecione o(s) assento(s)</Title>
@@ -107,9 +116,11 @@ export default function Seats({ post, setPost, seats, setSeats }) {
 
             <Button onClick={() => {
                 setPost(post => ({...post,
+                    ids: getSeatsName(),
                     name: inName,
                     cpf: inCPF
                 }))
+                console.log(post)
                 navigate('/sucesso');
                 console.log(post);
             }}>Reservar assento(s)</Button>
