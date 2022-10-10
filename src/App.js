@@ -16,6 +16,7 @@ export default function App() {
     const [movieName, setMovieName] = useState("");
     const [session, setSession] = useState("");
     const [post, setPost] = useState({});
+    const [seats, setSeats] = useState([]);
 
     return(
         <BrowserRouter>
@@ -25,7 +26,7 @@ export default function App() {
                 <Routes>
                     <Route path="/" element={<Films setFolder={setFolder} setMovieName={setMovieName} />} />
                     <Route path="/sessoes/:movieID" element={<MovieTime setSession={setSession} />} />
-                    <Route path="/assentos/:sessionID" element={<Seats post={post} setPost={setPost} />} />
+                    <Route path="/assentos/:sessionID" element={<Seats post={post} setPost={setPost} seats={seats} setSeats={setSeats} />} />
                     <Route path="/sucesso" element={<Order />} />
                 </Routes>
             </Main>

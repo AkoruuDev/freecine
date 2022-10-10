@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { getSeats } from "../services/Axios";
 import ShowAlert from "../services/Alert";
@@ -28,8 +28,7 @@ function Seat({ e, seats, setSeats }) {
                     <Selected onClick={() => setShowConfirm(true)}>{e.name}</Selected> :
                     <Available onClick={() => {
                         setSelect(true);
-                        setSeats([...seats, e.id])
-                        console.log(e)
+                        setSeats([...seats, {id: e.id, name: e.name}])
                     }}>{e.name}</Available>
                     
             }
@@ -50,12 +49,12 @@ function Seat({ e, seats, setSeats }) {
     )
 }
 
-export default function Seats({ post, setPost }) {
+export default function Seats({ post, setPost, seats, setSeats }) {
     const [mySeats, setMySeats] = useState([]);
-    const [seats, setSeats] = useState([]);
     const [inName, setInName] = useState("");
     const [inCPF, setInCPF] = useState("");
 
+    const navigate = useNavigate();
     const { sessionID } = useParams();
 
     useEffect(() => {
@@ -108,10 +107,10 @@ export default function Seats({ post, setPost }) {
 
             <Button onClick={() => {
                 setPost(post => ({...post,
-                    ids: seats,
                     name: inName,
                     cpf: inCPF
                 }))
+                navigate('/sucesso');
                 console.log(post);
             }}>Reservar assento(s)</Button>
         </Container>
