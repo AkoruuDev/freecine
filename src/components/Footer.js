@@ -8,7 +8,7 @@ export default function Footer({ folder, movieName, session }) {
                     <Image src={folder} alt='folder' />
                     <Info>
                         <Text>{movieName}</Text>
-                        <Text>{session}</Text>
+                        <Text>{session.week} - {session.hour}</Text>
                     </Info>
                 </>
             )}

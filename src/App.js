@@ -27,7 +27,7 @@ export default function App() {
                     <Route path="/" element={<Films setFolder={setFolder} setMovieName={setMovieName} />} />
                     <Route path="/sessoes/:movieID" element={<MovieTime setSession={setSession} />} />
                     <Route path="/assentos/:sessionID" element={<Seats post={post} setPost={setPost} seats={seats} setSeats={setSeats} />} />
-                    <Route path="/sucesso" element={<Order />} />
+                    <Route path="/sucesso" element={<Order post={post} seats={seats} movieName={movieName} session={session} />} />
                 </Routes>
             </Main>
             <Footer folder={folder} movieName={movieName} session={session} />

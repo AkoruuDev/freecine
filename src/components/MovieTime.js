@@ -5,7 +5,7 @@ import { getSessions } from "../services/Axios";
 
 function Time({ time, setSession }) {
     const navigate = useNavigate();
-
+    console.log(time)
     return(
         <div>
             <Info>{time.weekday} - {time.date}</Info>
@@ -13,7 +13,7 @@ function Time({ time, setSession }) {
                 <Button key={hour.id}
                     onClick={() => {
                         navigate(`/assentos/${hour.id}`);
-                        setSession(`${time.weekday} - ${hour.name}`)
+                        setSession({week: time.weekday, hour: hour.name, date: time.date})
                     }}>
                         {hour.name}
                 </Button>

@@ -1,16 +1,22 @@
 import styled from "styled-components";
 
-export default function Order() {
+export default function Order({ seats, post, movieName, session }) {
+
+    console.log(seats)
+    console.log(post)
+    console.log(session)
     return(
         <Container>
             <Title>Pedido feito com sucesso!</Title>
             <Main>
                 <Text>Filme e sessão</Text>
-                <>{""}</>
-                <>{""}</>
+                <h3>{movieName}</h3>
+                <h3>{session.date} - {session.hour}</h3>
                 <Text>Ingressos</Text>
-                <>{"map"}</>
+                <div>{seats.map(seat => <div>assento {seat.name}</div>)}</div>
                 <Text>Comprador</Text>
+                <div>{post.name}</div>
+                <div>{post.cpf}</div>
             </Main>
             <Button>Voltar pra Home</Button>
         </Container>
@@ -33,10 +39,18 @@ const Title = styled.h1`
     color: #247A6B;
 `
 
+const Main = styled.div`
+    width: 70vw;
+    padding: 25px 0;
+
+    display: flex;
+    flex-direction: column;
+`
+
 const Text = styled.label`
     font-size: 18px;
     font-weight: 700;
-    margin: 12px 0 8px 0;
+    margin: 25px 0 8px 0;
 `
 
 const Button = styled.div`
