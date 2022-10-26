@@ -1,4 +1,4 @@
-# ZapRecall
+# Freecine
 
 Projeto com a proposta de criar um App de compra de bilhetes para filmes de cinema
 
@@ -35,16 +35,16 @@ Projeto com a proposta de criar um App de compra de bilhetes para filmes de cine
 
 ### Mobile View
 <div>
-    <img width="400" src="./docs/layout/mobile001.png">
-    <img width="400" src="./docs/layout/mobile002.png">
-    <img width="400" src="./docs/layout/mobile003.png">
-    <img width="400" src="./docs/layout/mobile004.png">
+    <img heigth="400" src="./docs/layout/mobile001.png">
+    <img heigth="400" src="./docs/layout/mobile002.png">
+    <img heigth="400" src="./docs/layout/mobile003.png">
+    <img heigth="400" src="./docs/layout/mobile004.png">
 </div>
 
 ### Cancel Box
 <div>
-    <img width="400" src="./docs/layout/cancelDesktop.png">
-    <img width="400" src="./docs/layout/cancelMobile.png">
+    <img heigth="400" src="./docs/layout/cancelDesktop.png">
+    <img heigth="400" src="./docs/layout/cancelMobile.png">
 </div>
 
 ### Informações complementares:
