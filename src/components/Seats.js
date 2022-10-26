@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
-import { getSeats, postRequest } from "../services/Axios";
+import { getSeats } from "../services/Axios";
 import ShowAlert from "../services/Alert";
 import ShowConfirm from "../services/Confirm";
 
 function handleRemoveSeat(e, seats, setSeats) {
-    const newArray = seats.filter(seat => seat !== e.id)
-    setSeats(newArray)
+    const newArray = seats.filter(seat => seat.id !== e.id);
+    setSeats(newArray);
 }
 
 function Seat({ e, seats, setSeats }) {
